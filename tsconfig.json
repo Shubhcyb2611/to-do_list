@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        "lib": ["es2021"],
+        "target": "es2021",
+        "module": "es2022",
+        "moduleResolution": "node",
+        "rootDir": "./src",
+        "allowSyntheticDefaultImports": true,
+        "outDir": "./dist",
+        "paths": {
+            "@/*": ["./src/*"]
+        },
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "sourceMap": false,
+        "typeRoots": ["./node_modules/@types", "./src/@types"]
+    },
+
+    "exclude": ["node_modules", "dist", "./scripts"],
+    "ts-node": {
+        "files": true
+    }
+}

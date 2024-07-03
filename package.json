@@ -1,0 +1,36 @@
+{
+  "name": "todo_list",
+  "version": "0.0.1",
+  "description": "",
+  "type": "module",
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.11.25",
+    "resolve-tspaths": "^0.8.17",
+    "ts-node": "10.9.1",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.4.2"
+  },
+  "dependencies": {
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.1",
+    "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
+    "express-list-endpoints": "^6.0.0",
+    "multer": "^1.4.5-lts.1",
+    "pino": "^8.18.0",
+    "pino-pretty": "^10.3.1",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "0.3.20"
+  },
+  "scripts": {
+    "dev": "node --watch --experimental-specifier-resolution=node --loader ./scripts/loader.js ./src/app.ts | pino-pretty",
+    "migrate": "npm run typeorm migration:run -- -d ./src/infrastructure/database.config.ts",
+    "generate-and-migrate": "npm run generate-migrations; npm run migrate",
+    "build": "tsc --project .; resolve-tspaths; fix-esm-import-path dist"
+  }
+}
