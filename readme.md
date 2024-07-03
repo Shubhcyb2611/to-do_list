@@ -1,7 +1,3 @@
-Certainly! Here's a concise README for your Simple Todo API project using Express with PostgreSQL and AWS S3 for optional image storage:
-
----
-
 # Simple Todo API
 
 ## Overview
@@ -12,7 +8,7 @@ This project implements a basic API for managing todo items with CRUD operations
 1. **Clone the Repository**
    ```bash
    git clone <repository_url>
-   cd simple-todo-api
+   cd todo-list
    ```
 
 2. **Install Dependencies**
@@ -31,16 +27,16 @@ This project implements a basic API for managing todo items with CRUD operations
    ```
 
 4. **Database Setup**
-   Ensure PostgreSQL is running locally. Create a database named `todo_db`.
+   Ensure PostgreSQL is running locally. Create a database named `todoList`.
 
 5. **Run Migrations**
    ```bash
-   npx knex migrate:latest
+   npm run generate-and-migrate 
    ```
 
 6. **Start the Server**
    ```bash
-   npm start
+   npm run dev
    ```
 
 ## API Endpoints
