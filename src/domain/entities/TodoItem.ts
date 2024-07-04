@@ -13,7 +13,7 @@ export class TodoItem extends BaseEntity {
   @Column({ nullable: true })
   image: string;
 
-  @Column({ nullable: true })
+  @Column({ type: "timestamp", nullable: true })
   dateOfCompletion: Date;
 
   @ManyToOne(() => User, (user) => user.item)

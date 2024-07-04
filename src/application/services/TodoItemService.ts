@@ -49,6 +49,7 @@ export class TodoItemService {
     // @ts-ignore
     const item = await this.todoitemRepository.findByIdAndUpdate(itemId, {
       completed: true,
+      dateOfCompletion: new Date(),
     });
     return item;
   }
