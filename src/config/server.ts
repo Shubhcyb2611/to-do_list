@@ -1,8 +1,10 @@
-import express , { Application } from "express";
+import express, { Application } from "express";
 import { UPLOADS_PATH } from "./env.config";
 import { appRouter } from "@/interfaces/routers";
 import { AppDataSource } from "@/infrastructure";
 import { Logger } from "./logger";
+import { ExpressErrorHandler, corsConfig } from "@/interfaces/middleware";
+import cors from "cors";
 
 export type AppConfig = {
   port?: number | string;
@@ -16,12 +18,14 @@ export class Server {
     this.config = config;
     this.app = express();
     this.app.use(express.json());
+    this.app.use(cors(corsConfig));
 
     if (UPLOADS_PATH) {
       this.app.use("/api/uploads", express.static(UPLOADS_PATH));
     }
 
     this.app.use("/api", appRouter);
+    this.app.use(ExpressErrorHandler);
   }
 
   private connectDatabase() {
@@ -37,7 +41,7 @@ export class Server {
 
   start() {
     const port = this.config.port || 1209;
-    this.connectDatabase(); 
+    this.connectDatabase();
 
     this.app.listen(port, () => {
       Logger.info(`Server started on http://localhost:${port}`);
