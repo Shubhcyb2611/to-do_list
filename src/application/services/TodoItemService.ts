@@ -29,6 +29,7 @@ export class TodoItemService {
 
       return item;
     } catch (error) {
+      console.log(error);
       throw new Error("500::Internal Server Error");
     }
   }
