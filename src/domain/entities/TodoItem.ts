@@ -16,7 +16,7 @@ export class TodoItem extends BaseEntity {
   @Column({ type: "timestamp", nullable: true })
   dateOfCompletion: Date;
 
-  @Column({ type: "char", nullable: true })
-  @ManyToOne(() => User, (user) => user.item)
+  @Column()
+  // @ManyToOne(() => User, (user) => user.item)
   createdBy: string;
 }
