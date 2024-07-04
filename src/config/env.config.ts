@@ -10,6 +10,10 @@ dotenv.config({ path: path.resolve(__dirname, "../../.env") });
 export const {
   PORT,
   DATABASE_URL,
+  AWS_S3_BUCKET_REGION,
+  AWS_S3_BUCKET_ACCESS_KEY,
+  AWS_S3_BUCKET_ACCESS_SECRET,
+  AWS_S3_BUCKET_NAME,
   ENV,
   UPLOADS_PATH,
   PUBLIC_BASE_URI,
