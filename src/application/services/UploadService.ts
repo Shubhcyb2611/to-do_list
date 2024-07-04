@@ -11,12 +11,8 @@ async function createDirIfNotExists(directory: PathLike) {
 }
 
 const imagesPath = path.resolve(UPLOADS_PATH, "./images");
-const videoPath = path.resolve(UPLOADS_PATH, "./videos");
-const galleryPath = path.resolve(UPLOADS_PATH, "./gallery");
 
 createDirIfNotExists(imagesPath);
-createDirIfNotExists(videoPath);
-createDirIfNotExists(galleryPath);
 
 const imageStorage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -27,24 +23,6 @@ const imageStorage = multer.diskStorage({
   },
 });
 
-const videoStorage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, videoPath);
-  },
-  filename: function (req, file, cb) {
-    cb(null, new Date().valueOf() + "_" + file.originalname);
-  },
-});
-
-const galleryStorage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, galleryPath);
-  },
-
-  filename: function (req, file, cb) {
-    cb(null, file.originalname);
-  },
-});
 function ensureIsSupported(file: any, cb: any, fileTypes: RegExp) {
   const extension = fileTypes.test(path.extname(file.originalname));
   if (extension) {
@@ -56,22 +34,6 @@ function ensureIsSupported(file: any, cb: any, fileTypes: RegExp) {
 export const uploadImage = multer({
   dest: imagesPath,
   storage: imageStorage,
-  fileFilter: function (req, file, cb) {
-    ensureIsSupported(file, cb, /jpg|jpeg|png|heic|webp/);
-  },
-});
-
-export const uplaodVideo = multer({
-  dest: videoPath,
-  storage: videoStorage,
-  fileFilter: function (req, file, cb) {
-    ensureIsSupported(file, cb, /mov|mp4/);
-  },
-});
-
-export const uploadGallery = multer({
-  dest: galleryPath,
-  storage: galleryStorage,
   fileFilter: function (req, file, cb) {
     ensureIsSupported(file, cb, /jpg|jpeg|png|heic|webp/);
   },
