@@ -6,14 +6,21 @@ import { TodoItemController } from "../controllers/todoitem.controller";
 
 const router = Router();
 
-const todoitemRepository = getRepository(TodoItem);
-const todoItemService = new TodoItemService(todoitemRepository);
-const todoitemController = new TodoItemController(todoItemService);
+const todoItemRepository = getRepository(TodoItem);
+const todoItemService = new TodoItemService(todoItemRepository);
+const todoItemController = new TodoItemController(todoItemService);
 
-router.route("/").post(todoitemController.createTodoItem);
+router
+  .route("/")
+  .post(todoItemController.createTodoItem)
+  .get(todoItemController.getAllItems);
+
 router
   .route("/:id")
-  .get(todoitemController.getTodoItemById)
-  .put(todoitemController.updateTodoItem);
+  .get(todoItemController.getTodoItemById)
+  .put(todoItemController.updateTodoItem)
+  .delete(todoItemController.deleteTodoItem);
+
+router.route("/:id/markComplete").put(todoItemController.markComplete);
 
 export default router;

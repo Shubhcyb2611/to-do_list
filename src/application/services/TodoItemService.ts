@@ -43,4 +43,13 @@ export class TodoItemService {
     const items = await this.todoitemRepository.findMany({});
     return items;
   }
+
+  async markComplete(itemId: number) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    const item = await this.todoitemRepository.findByIdAndUpdate(itemId, {
+      completed: true,
+    });
+    return item;
+  }
 }

@@ -37,4 +37,9 @@ export class TodoItemController {
     const items = await this.todoItemService.getAllItems();
     return items;
   };
+
+  markComplete = async (req: Request, res: Response) => {
+    const item = await this.todoItemService.markComplete(Number(req.params.id));
+    return item;
+  };
 }
