@@ -17,7 +17,6 @@ export class Server {
     this.app = express();
     this.app.use(express.json());
 
-    // If using static file serving
     if (UPLOADS_PATH) {
       this.app.use("/api/uploads", express.static(UPLOADS_PATH));
     }
@@ -38,7 +37,7 @@ export class Server {
 
   start() {
     const port = this.config.port || 1209;
-    this.connectDatabase(); // Uncomment to enable database connection
+    this.connectDatabase(); 
 
     this.app.listen(port, () => {
       Logger.info(`Server started on http://localhost:${port}`);
