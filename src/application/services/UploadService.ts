@@ -3,6 +3,7 @@ import path from "path";
 import { PathLike } from "fs";
 import { promises as fs } from "fs";
 import { UPLOADS_PATH } from "@/config/env.config";
+import { fileURLToPath } from "url";
 
 async function createDirIfNotExists(directory: PathLike) {
   fs.access(directory).catch(() => {
@@ -10,7 +11,12 @@ async function createDirIfNotExists(directory: PathLike) {
   });
 }
 
-const imagesPath = path.resolve(UPLOADS_PATH, "./images");
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const uploadsPath =
+  UPLOADS_PATH || path.join(__dirname, "./../../static/images");
+
+const imagesPath = path.resolve(uploadsPath, "./");
 
 createDirIfNotExists(imagesPath);
 

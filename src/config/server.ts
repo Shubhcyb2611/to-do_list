@@ -10,6 +10,7 @@ import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const uploadsPath = UPLOADS_PATH || path.join(__dirname, "./../static");
 
 export type AppConfig = {
   port?: number | string;
@@ -27,10 +28,8 @@ export class Server {
     this.app.get("/", (req, res) => {
       res.sendFile(path.join(__dirname, "./../index.html"));
     });
-    const uploadsPath = UPLOADS_PATH || path.join(__dirname, "./../static");
-    if (UPLOADS_PATH) {
-      this.app.use("/api/uploads", express.static(uploadsPath));
-    }
+
+    this.app.use("/api/uploads", express.static(uploadsPath));
 
     this.app.use("/api", appRouter);
     this.app.use(ExpressErrorHandler);
