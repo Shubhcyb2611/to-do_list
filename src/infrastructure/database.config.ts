@@ -10,8 +10,18 @@ const __dirname = path.dirname(__filename);
 // Load environment variables from .env file
 dotenv.config({ path: path.resolve(__dirname, "../../.env") });
 
+// Debugging: Log the loaded environment variables
+console.log(
+  `Environment variables loaded: ${JSON.stringify(process.env, null, 2)}`
+);
+
 // Retrieve database URL from environment variables
 const { DATABASE_URL } = process.env;
+
+// Check if DATABASE_URL is defined
+if (!DATABASE_URL) {
+  throw new Error("DATABASE_URL environment variable is not defined");
+}
 
 // Define paths to entities and migrations
 const entitiesPath = path.resolve(__dirname, "../domain/entities/*.{ts,js}");
@@ -19,10 +29,9 @@ const migrationsPath = path.resolve(__dirname, "./migrations/*.{ts,js}");
 
 // Create a new DataSource instance for TypeORM
 export const AppDataSource = new DataSource({
-  type: "postgres", // Adjust the type if you are using a different database
+  type: "postgres",
   url: DATABASE_URL,
   entities: [entitiesPath],
-  synchronize: false, // Set to true for development, false for production
+  synchronize: false,
   migrations: [migrationsPath],
 });
-
