@@ -16,5 +16,4 @@ export const {
   AWS_S3_BUCKET_NAME,
   ENV,
   UPLOADS_PATH,
-  PUBLIC_BASE_URI,
 } = process.env;

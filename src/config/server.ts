@@ -5,6 +5,11 @@ import { AppDataSource } from "@/infrastructure";
 import { Logger } from "./logger";
 import { ExpressErrorHandler, corsConfig } from "@/interfaces/middleware";
 import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export type AppConfig = {
   port?: number | string;
@@ -19,6 +24,9 @@ export class Server {
     this.app = express();
     this.app.use(express.json());
     this.app.use(cors(corsConfig));
+    this.app.get("/", (req, res) => {
+      res.sendFile(path.join(__dirname, "./../index.html"));
+    });
 
     if (UPLOADS_PATH) {
       this.app.use("/api/uploads", express.static(UPLOADS_PATH));
@@ -40,7 +48,7 @@ export class Server {
   }
 
   start() {
-    const port = this.config.port || 1209;
+    const port = this.config.port;
     this.connectDatabase();
 
     this.app.listen(port, () => {
@@ -48,8 +56,3 @@ export class Server {
     });
   }
 }
-
-// Usage
-const config: AppConfig = { port: 1209 };
-const server = new Server(config);
-server.start();
