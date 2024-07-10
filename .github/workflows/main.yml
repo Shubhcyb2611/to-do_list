@@ -2,22 +2,21 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build:
-
     runs-on: self-hosted
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js 16.x
-      uses: actions/setup-node@v2
-      with:
-        node-version: 16.x
-    - run: npm install
-    - run: npm run build
-    - run: npm run dev
-    - run: pm2 restart app-name
+      - uses: actions/checkout@v2
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+      - run: npm install
+      - run: npm run build
+      - run: npm run dev
+      - run: pm2 restart to-do_list
