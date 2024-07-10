@@ -14,6 +14,7 @@ export const {
   AWS_S3_BUCKET_ACCESS_KEY,
   AWS_S3_BUCKET_ACCESS_SECRET,
   AWS_S3_BUCKET_NAME,
+  JWT_SECRET,
   ENV,
   UPLOADS_PATH,
 } = process.env;
