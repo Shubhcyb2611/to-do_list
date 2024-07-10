@@ -10,11 +10,6 @@ const __dirname = path.dirname(__filename);
 // Load environment variables from .env file
 dotenv.config({ path: path.resolve(__dirname, "../../.env") });
 
-// Debugging: Log the loaded environment variables
-console.log(
-  `Environment variables loaded: ${JSON.stringify(process.env, null, 2)}`
-);
-
 // Retrieve database URL from environment variables
 const { DATABASE_URL } = process.env;
 
