@@ -5,7 +5,12 @@ import {
   AWS_S3_BUCKET_ACCESS_SECRET,
   AWS_S3_BUCKET_NAME,
 } from "@/config/env.config";
-import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import {
+  S3Client,
+  PutObjectCommand,
+  GetObjectCommand,
+} from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 export const s3 = new S3Client({
   region: AWS_S3_BUCKET_REGION,
@@ -33,5 +38,20 @@ export class UploadsController {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     res.json({ uri: `/api/uploads/images/${req.file.filename}` });
+  };
+
+  async getObjectUrl(key) {
+    const command = new GetObjectCommand({
+      Bucket: AWS_S3_BUCKET_NAME,
+      Key: key,
+    });
+    const url = getSignedUrl(s3, command);
+
+    return url;
+  }
+
+  getURl = async (req: Request, res: Response) => {
+    const url = await this.getObjectUrl("Delete.png");
+    return res.status(200).json(url);
   };
 }
