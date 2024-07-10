@@ -27,9 +27,9 @@ export class Server {
     this.app.get("/", (req, res) => {
       res.sendFile(path.join(__dirname, "./../index.html"));
     });
-
+    const uploadsPath = UPLOADS_PATH || path.join(__dirname, "./../static");
     if (UPLOADS_PATH) {
-      this.app.use("/api/uploads", express.static(UPLOADS_PATH));
+      this.app.use("/api/uploads", express.static(uploadsPath));
     }
 
     this.app.use("/api", appRouter);
